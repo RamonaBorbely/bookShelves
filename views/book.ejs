@@ -1,0 +1,22 @@
+<%- include('partials/header') %>
+
+<div>
+    <h1><%= book.name%></h1>
+    <img src="/data/book-covers<%= book.img_paths.slice(7) %>" alt="<%= book.name %> cover">
+    <h2 class="text-xl font-semibold"><%= book.name %></h2>
+    <p class="text-sm text-gray-600"><%= book.author %></p>
+    <p class="mt-2"><%= book.description %></p>
+    <p class="mt-2"><%= book.book_depository_stars %></p>
+    <p class="mt-2"><%= book.category %></p>
+
+    <form action="/mybooks/<%= book._id%>" method="post">
+        <button
+        type="submit"
+        class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        onClick=""
+    >
+        Add to your list
+    </button>
+</div> 
+
+<%- include('partials/footer') %>

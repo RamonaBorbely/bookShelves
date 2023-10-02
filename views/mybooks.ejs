@@ -1,0 +1,40 @@
+<%- include('partials/header') %>
+
+<% if (locals.error) { %>
+    <div class="bg-red-100 border border-red-400 text-red-700 mb-4">
+        <%= locals.error %>
+    </div>
+<% } %>
+    <div class="flex flex-col items-start mt-5 px-4">
+    <a href="/books" class="hover:underline text-blue-600 font-bold">Return to main books</a>
+    <% if(books && books.length > 0) { %>
+    <form action="/mybooks?_method=DELETE" method="post">
+        <button type="submit" class="hover:underline text-red-600 font-bold">Clear your list</button>
+    </form>
+    <% } %>
+</div>
+    <div class="container mx-auto px-4 py-6">
+
+    <h1 class="text-3xl font-bold mb-4">My books</h1>
+
+    <ul class="space-y-4">
+        <% books.forEach(book => {%>
+            <li class="p-4 border rounded shadow-md">
+                <h2 class="text-xl font-semibold"><%= book.name %></h2>
+                <p class="text-sm text-gray-600 mt-2"><%= book.author %></p>
+
+                <!-- https://stackoverflow.com/questions/72611507/form-delete-method-is-redirecting-to-the-get-method-instead-in-express-js -->
+                <!-- https://expressjs.com/en/resources/middleware/method-override.html -->
+                <form action="/mybooks/<%= book._id%>?_method=DELETE" method="post" >
+                    <button 
+                        type="submit"
+                        class="mt-4 bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded"
+                    >
+                        Remove book
+                    </button>
+            </form>
+            </li>
+        <% }) %>
+    </ul>
+</div>
+<%- include('partials/footer') %>
